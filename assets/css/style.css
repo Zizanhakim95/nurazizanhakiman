@@ -98,8 +98,9 @@ body {
 }
 
 h1, h2, h3, h4 { color: var(--ink); margin: 0 0 .5em; line-height: 1.15; letter-spacing: -.022em; font-weight: 700; }
-h1, h2 { text-wrap: balance; }
-.section-sub, .cert-sub, .card p, .prose p, .tick-list li, .hero-lede { text-wrap: pretty; }
+h1 { text-wrap: balance; }
+h2 { text-wrap: pretty; }   /* balance would re-split headings that use a manual <br> */
+.section-sub, .cert-sub, .card p, .prose p, .tick-list li, .hero-lede, .steps li { text-wrap: pretty; }
 h1 { font-size: clamp(2.35rem, 5.4vw, 4rem); font-weight: 800; letter-spacing: -.035em; }
 h2 { font-size: clamp(1.7rem, 3.3vw, 2.5rem); }
 h3 { font-size: 1.12rem; font-weight: 650; }
@@ -314,22 +315,21 @@ img.avatar {
 .profile-mail:hover { color: #8ec5ff; text-decoration: none; }
 
 /* ---------------------------------------------------------------- 6 about */
-.about-grid { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: clamp(30px, 4.2vw, 58px); align-items: start; }
-.about-body { display: grid; gap: 1.5rem; }
+.about-grid { display: grid; grid-template-columns: minmax(0, 238px) minmax(0, 1fr); gap: clamp(28px, 4vw, 52px); align-items: start; }
 .portrait { position: relative; margin: 0; }
 .portrait img {
   display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover;
-  border-radius: var(--radius-lg); border: 1px solid var(--border); box-shadow: var(--shadow-md);
+  border-radius: var(--radius-lg); border: 1px solid var(--border-strong); box-shadow: var(--shadow-md);
   position: relative; z-index: 1;   /* photo paints over the offset frame */
 }
 /* offset frame: the same box shifted down-right, so a continuous rule shows
    along the right and bottom edges (a partial corner reads as a glitch). */
 .portrait::before {
-  content: ""; position: absolute; inset: 14px -14px -14px 14px;
+  content: ""; position: absolute; inset: 10px -10px -10px 10px;
   border: 2px solid var(--rail); border-radius: var(--radius-lg);
 }
 
-.prose p { font-size: 1.055rem; color: var(--ink-2); max-width: 68ch; }
+.prose p { font-size: 1.055rem; color: var(--ink-2); max-width: 60ch; }
 .prose p:first-of-type::first-letter { font-size: 1.02em; }
 .prose p:last-child { margin-bottom: 0; }
 
@@ -347,6 +347,14 @@ img.avatar {
   background: var(--accent-soft); color: var(--accent); font-size: .72rem; font-weight: 700; letter-spacing: .02em;
 }
 .steps strong { color: var(--ink); font-weight: 650; }
+/* process strip spans the full width beneath the photo + prose row, so the
+   shorter left column doesn't leave a dead area beside a taller right one */
+.mini-card--process { margin-top: clamp(30px, 3.6vw, 46px); }
+/* in the strip the number sits above the text, so each step gets the full
+   column width instead of wrapping around the badge */
+.steps--row { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1.15rem; }
+.steps--row li { padding-left: 0; padding-top: 2.35rem; font-size: .92rem; }
+.steps--row li::before { top: 0; }
 
 /* ------------------------------------------------------------ 7 expertise */
 .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(288px, 1fr)); gap: 1.15rem; }
@@ -559,7 +567,8 @@ img.avatar {
   .hero-grid { grid-template-columns: 1fr; }
   .profile-card { max-width: 520px; }
   .about-grid, .contact-grid { grid-template-columns: 1fr; }
-  .portrait { max-width: 330px; }
+  .portrait { max-width: 200px; margin-inline: auto; }
+  .steps--row { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
   .stat-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.3rem 1px; }
 }
 
@@ -607,7 +616,10 @@ img.avatar {
   .tl-role { font-size: 1rem; }
   .contact-form { padding: 1.3rem; }
   .to-top { right: 16px; bottom: 16px; }
-  .portrait { max-width: 250px; }
+  .portrait { max-width: 160px; margin-inline: auto; }   /* centred: left-aligned left a dead gap */
+  .portrait::before { display: none; }   /* offset frame reads as lopsided at this size */
+  .steps--row { grid-template-columns: 1fr; gap: .8rem; }
+  .steps--row li { padding-top: 2.2rem; }
 }
 
 /* ------------------------------------------------------ 14 motion / print */
@@ -632,6 +644,7 @@ img.avatar {
   .skill-group.is-hidden, .cert.is-hidden { display: block !important; }
   .portrait { max-width: 170px; }
   .portrait::before { display: none; }
+  .steps--row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   img.avatar { box-shadow: none; }
   a { color: #000; text-decoration: none; }
 }

@@ -77,13 +77,14 @@ All three give a free HTTPS URL. GitHub Pages is the best fit if you want a last
    as honest and specific rather than inflated. If you later pass the exams, update the card type
    to *Certification* and the footnote accordingly.
 4. **The headshot is in place.** Two crops live in `assets/img/`: `portrait.jpg` (1000×1333, About
-   section, displayed 300×400 with a 14px offset accent frame) and `portrait-avatar.jpg` (320×320,
-   square head crop, hero profile card, displayed 56×56). To swap in a different photo, export your
-   image at those two sizes with the same filenames — or just replace both files and the layout will
-   adapt, since both use `object-fit: cover`. To go back to the "NA" monogram, put
-   `<div class="avatar" aria-hidden="true">NA</div>` back in place of the `<img class="avatar" …>`
-   in the hero profile card. For `og:image` (the preview card when the link is shared), the meta tag
-   is commented out in `index.html` near the top — uncomment it and paste your live absolute URL.
+   section — displayed 238×317 on desktop, 200px in the single-column layout, 160px and centred on
+   phones) and `portrait-avatar.jpg` (320×320, square head crop, hero profile card, displayed 56×56).
+   To swap in a different photo, export your image at those two sizes with the same filenames — or
+   just replace both files and the layout will adapt, since both use `object-fit: cover`. To go back
+   to the "NA" monogram, put `<div class="avatar" aria-hidden="true">NA</div>` back in place of the
+   `<img class="avatar" …>` in the hero profile card. For `og:image` (the preview card when the link
+   is shared), the meta tag is commented out in `index.html` near the top — uncomment it and paste
+   your live absolute URL.
 
 ---
 

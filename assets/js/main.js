@@ -36,6 +36,7 @@
   const header   = $('#siteHeader');
   const progress = $('#progressBar');
   const toTop    = $('#toTop');
+  let lastY = window.scrollY || window.pageYOffset;
 
   function onScroll() {
     const y = window.scrollY || window.pageYOffset;
@@ -45,7 +46,16 @@
       const h = document.documentElement.scrollHeight - window.innerHeight;
       progress.style.width = (h > 0 ? Math.min(100, (y / h) * 100) : 0) + '%';
     }
-    if (toTop) toTop.classList.toggle('is-visible', y > 700);
+
+    if (toTop) {
+      // Shown while scrolling back up, or once you reach the end of the page,
+      // so it never sits on top of the text you're reading on the way down.
+      const goingUp  = y < lastY - 4;
+      const atEnd    = y + window.innerHeight >= document.documentElement.scrollHeight - 4;
+      toTop.classList.toggle('is-visible', y > 700 && (goingUp || atEnd));
+    }
+
+    if (Math.abs(y - lastY) > 4) lastY = y;
   }
 
   let ticking = false;
