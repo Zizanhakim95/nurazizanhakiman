@@ -10,10 +10,14 @@ azizan-cv-site/
 │  ├─ css/style.css                             theme, layout, animations
 │  ├─ js/main.js                                interactivity (vanilla JS)
 │  ├─ img/favicon.svg                           browser tab icon ("NA" monogram)
+│  ├─ img/portrait.jpg                          1000 x 1333 headshot, About section
+│  ├─ img/portrait-avatar.jpg                   320 x 320 square head crop, hero card
 │  └─ CV-Nur-Azizan-Hakiman-Bin-Mohd-Yusoff.pdf the file the Download CV button serves
 ├─ .nojekyll                                    tells GitHub Pages not to run Jekyll
 └─ README.md                                    this file
 ```
+
+Total weight: ~490 KB including the CV PDF, so the whole site loads in one round trip.
 
 ---
 
@@ -72,10 +76,14 @@ All three give a free HTTPS URL. GitHub Pages is the best fit if you want a last
    because a client who clicks through to your Microsoft Learn profile sees exactly that. It reads
    as honest and specific rather than inflated. If you later pass the exams, update the card type
    to *Certification* and the footnote accordingly.
-4. **Add a headshot (optional).** The site uses an "NA" monogram so it looks finished without a
-   photo. To use a real one: drop `portrait.jpg` into `assets/img/`, then in `index.html` replace
-   `<div class="avatar" aria-hidden="true">NA</div>` (in the hero) with
-   `<img class="avatar" src="assets/img/portrait.jpg" alt="Nur Azizan Hakiman" width="56" height="56">`.
+4. **The headshot is in place.** Two crops live in `assets/img/`: `portrait.jpg` (1000×1333, About
+   section, displayed 300×400 with a 14px offset accent frame) and `portrait-avatar.jpg` (320×320,
+   square head crop, hero profile card, displayed 56×56). To swap in a different photo, export your
+   image at those two sizes with the same filenames — or just replace both files and the layout will
+   adapt, since both use `object-fit: cover`. To go back to the "NA" monogram, put
+   `<div class="avatar" aria-hidden="true">NA</div>` back in place of the `<img class="avatar" …>`
+   in the hero profile card. For `og:image` (the preview card when the link is shared), the meta tag
+   is commented out in `index.html` near the top — uncomment it and paste your live absolute URL.
 
 ---
 
